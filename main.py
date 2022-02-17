@@ -36,21 +36,18 @@ async def say(ctx, arg):
 @client.event
 async def on_member_join(member):
     embed = discord.Embed(title="Welcome to the CAPSOC Server!", description="Here you can find all kinds of stuff, but before you do anything, please take time to look into our **Rules** channel and get familiar with it. If you have any questions or concerns, please contact the moderators of this sever!", color=0x42f5e3)
+    embed.set_author(name="CAPSOC Moderators", icon_url="https://pbs.twimg.com/profile_images/538868741455368192/m7HlFzv1_400x400.jpeg")
     embed.set_thumbnail(url="https://cdn-images-1.medium.com/max/650/1*xrx4PIQvza23h7SorC4MnA.gif")
+    embed.set_footer(text="Necessaria vis est!")
     await member.send(embed=embed)
 
 @client.command()
 async def message(ctx, user:discord.Member, *, message=None):
     embed = discord.Embed(title="Welcome to the CAPSOC Server!", description="Here you can find all kinds of stuff, but before you do anything, please take time to look into our **Rules** channel and get familiar with it. If you have any questions or concerns, please contact the moderators of this sever!", color=0x42f5e3)
+    embed.set_author(name="CAPSOC Moderators", icon_url="https://pbs.twimg.com/profile_images/538868741455368192/m7HlFzv1_400x400.jpeg")
     embed.set_thumbnail(url="https://cdn-images-1.medium.com/max/650/1*xrx4PIQvza23h7SorC4MnA.gif")
+    embed.set_footer(text="Necessaria vis est!")
     await user.send(embed=embed)
-
-
-@client.command()
-async def embed(ctx):
-    embed=discord.Embed(title="Welcome to the CAPSOC Server!", description="Here you can find all kinds of stuff, but before you do anything, please take time to look into our **Rules** channel and get familiar with it. If you have any questions or concerns, please contact the moderators of this sever!", color=0x42f5e3)
-    embed.set_thumbnail(url="https://cdn-images-1.medium.com/max/650/1*xrx4PIQvza23h7SorC4MnA.gif")
-    await ctx.send(embed=embed)
 
 
 client.run(TOKEN)
