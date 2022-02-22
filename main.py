@@ -83,7 +83,7 @@ async def rickroll(ctx):
         player = voice.play(source)
 
     else:
-        await ctx.send("No")
+        await ctx.send("No, you can't, just no dude")
 
 #Leave Command
 @bot.command(name='leave', help='To make the bot leave the voice channel')
