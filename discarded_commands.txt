@@ -5,3 +5,52 @@ async def on_member_join(member):
     (
         f'Hey {member.name}, welcome to the **CAPSOC Discord Server!** Here you can find all kinds of stuff, but before you do anything, please take time to look into our **Rules** channel and get familiar with it. If you have any questions or concerns, please contact the moderators of this sever!'
     )
+
+=======
+
+Warn Commands
+
+def save_warn(ctx, member: discord.Member):
+    with open('warns.json', 'r') as f:
+         warns = json.load(f)
+
+         warns[str(member.id)] += 1
+
+    with open('warns.json', 'w') as f:
+         json.dump(warns, f)
+
+def remove_warn(ctx, member: discord.Member, amount: int):
+    with open('warns.json', 'r') as f:
+         warns = json.load(f)
+
+         warns[str(member.id)] -= amount
+
+    with open('warns.json', 'w') as f:
+         json.dump(warns, f)
+    
+def warns_check(member: discord.Member):
+    with open('warns.json', 'r') as f:
+         warns = json.load(f)
+
+         warns[str(member.id)]
+    return warns
+
+@client.command()
+@commands.has_permissions(kick_members=True)
+async def warn(ctx, member: discord.Member, *, reason):
+      save_warn(ctx, member)
+      dm = await client.fetch_user(member.id)
+      em=discord.Embed(title="Warning", description=f"Server: {ctx.guild.id}\nReason: {reason}")
+      await dm.send(embed=em)
+
+@client.command()
+@commands.has_permissions(kick_members=True)
+async def warnings(ctx, member: discord.Member):
+      warns = warns_check(member)
+      await ctx.send(f"{member.name} has {warns} warnings.")
+
+@client.command()
+@commands.has_permissions(kick_members=True)
+async def rmwarn(ctx, member: discord.Member, amount: int):
+      remove_warn(ctx, member, amount)
+      await ctx.send(f"Removed {amount} warnings from {member.name}!")
